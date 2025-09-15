@@ -37,8 +37,8 @@ export const siteConfig: SiteConfig = {
   location: 'France',
   email: 'contact@example.com',
   socials: {
-    linkedin: 'https://www.linkedin.com/in/your-linkedin',
-    github: 'https://github.com/your-github',
+    linkedin: 'https://www.linkedin.com/in/romainbrochet/',
+    github: 'https://github.com/RBOM12',
   },
   resumePath: '/CV_Romain_Brochet.pdf',
   experiences: [
