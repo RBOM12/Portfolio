@@ -2,22 +2,35 @@ import { Card, CardActions, CardContent, CardHeader, Chip, Button, Stack, Typogr
 import Grid from '@mui/material/GridLegacy'
 import { useMemo, useState } from 'react'
 import ProjectFilters from '../components/ProjectFilters'
+import LaunchIcon from '@mui/icons-material/Launch'
+import GitHubIcon from '@mui/icons-material/GitHub'
 
-const projects = [
+type Project = {
+  title: string
+  description: string
+  tags: string[]
+  sourceUrl?: string
+  demoUrl?: string
+}
+
+const projects: Project[] = [
   {
     title: 'Sales Dashboard',
     description: 'Built interactive BI dashboards to analyze sales, margins, and forecasts.',
     tags: ['Power BI', 'DAX', 'SQL'],
+    demoUrl: 'https://example.com/sales-dashboard',
   },
   {
     title: 'Customer Churn Analysis',
     description: 'Explored churn drivers and built a simple predictive model.',
     tags: ['Python', 'pandas', 'scikit-learn'],
+    sourceUrl: 'https://github.com/your-github/churn-analysis',
   },
   {
     title: 'Process Automation',
     description: 'Automated data extraction and reporting with Python scripts.',
     tags: ['Python', 'APIs', 'Scheduling'],
+    sourceUrl: 'https://github.com/your-github/process-automation',
   },
 ]
 
@@ -44,8 +57,12 @@ export default function Projects() {
                 </Stack>
               </CardContent>
               <CardActions>
-                <Button size="small">Details</Button>
-                <Button size="small" variant="outlined">Source</Button>
+                {p.demoUrl && (
+                  <Button size="small" endIcon={<LaunchIcon />} href={p.demoUrl} target="_blank" rel="noopener">Demo</Button>
+                )}
+                {p.sourceUrl && (
+                  <Button size="small" variant="outlined" endIcon={<GitHubIcon />} href={p.sourceUrl} target="_blank" rel="noopener">Source</Button>
+                )}
               </CardActions>
             </Card>
           </Grid>

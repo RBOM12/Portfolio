@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import type { ReactNode } from 'react'
-import { AppBar, Box, Container, Divider, Drawer, IconButton, List, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography, useMediaQuery } from '@mui/material'
+import { AppBar, Box, Container, Divider, Drawer, IconButton, Link, List, ListItemButton, ListItemIcon, ListItemText, Stack, Toolbar, Typography, useMediaQuery } from '@mui/material'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu'
 import HomeIcon from '@mui/icons-material/Home'
@@ -12,6 +12,9 @@ import EmailIcon from '@mui/icons-material/Email'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
 import { ColorModeContext } from '../theme/ColorModeContext'
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import GitHubIcon from '@mui/icons-material/GitHub'
+import { siteConfig } from '../config'
 
 type MainLayoutProps = {
   children: ReactNode
@@ -22,6 +25,7 @@ const navItems = [
   { label: 'About', to: '/about', icon: <PersonIcon /> },
   { label: 'Skills', to: '/skills', icon: <BarChartIcon /> },
   { label: 'Projects', to: '/projects', icon: <WorkIcon /> },
+  { label: 'Experience', to: '/experience', icon: <WorkIcon /> },
   { label: 'Resume', to: '/resume', icon: <DescriptionIcon /> },
   { label: 'Contact', to: '/contact', icon: <EmailIcon /> },
 ]
@@ -34,9 +38,21 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
   const drawer = (
     <Box role="presentation" onClick={() => setOpen(false)} sx={{ width: 280 }}>
-      <Typography variant="h6" sx={{ p: 2 }}>
-        MIAGE Portfolio
-      </Typography>
+      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ p: 2 }}>
+        <Typography variant="h6">{siteConfig.name}</Typography>
+        <Stack direction="row" spacing={1}>
+          {siteConfig.socials.linkedin && (
+            <IconButton component={Link} href={siteConfig.socials.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn">
+              <LinkedInIcon />
+            </IconButton>
+          )}
+          {siteConfig.socials.github && (
+            <IconButton component={Link} href={siteConfig.socials.github} target="_blank" rel="noopener" aria-label="GitHub">
+              <GitHubIcon />
+            </IconButton>
+          )}
+        </Stack>
+      </Stack>
       <Divider />
       <List>
         {navItems.map((item) => (
@@ -59,8 +75,20 @@ export default function MainLayout({ children }: MainLayoutProps) {
             </IconButton>
           )}
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            MIAGE Portfolio
+            {siteConfig.title}
           </Typography>
+          <Stack direction="row" spacing={1} sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+            {siteConfig.socials.linkedin && (
+              <IconButton component={Link} href={siteConfig.socials.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn">
+                <LinkedInIcon />
+              </IconButton>
+            )}
+            {siteConfig.socials.github && (
+              <IconButton component={Link} href={siteConfig.socials.github} target="_blank" rel="noopener" aria-label="GitHub">
+                <GitHubIcon />
+              </IconButton>
+            )}
+          </Stack>
           <IconButton onClick={colorMode.toggleColorMode} color="inherit" aria-label="toggle theme">
             {colorMode.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
           </IconButton>
@@ -84,6 +112,24 @@ export default function MainLayout({ children }: MainLayoutProps) {
         <Container maxWidth="lg">
           {children}
         </Container>
+        <Box component="footer" sx={{ py: 4 }}>
+          <Divider sx={{ mb: 2 }} />
+          <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ color: 'text.secondary' }}>
+            <Typography variant="body2">© {new Date().getFullYear()} {siteConfig.name}</Typography>
+            <Stack direction="row" spacing={1}>
+              {siteConfig.socials.linkedin && (
+                <IconButton component={Link} href={siteConfig.socials.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" size="small">
+                  <LinkedInIcon fontSize="small" />
+                </IconButton>
+              )}
+              {siteConfig.socials.github && (
+                <IconButton component={Link} href={siteConfig.socials.github} target="_blank" rel="noopener" aria-label="GitHub" size="small">
+                  <GitHubIcon fontSize="small" />
+                </IconButton>
+              )}
+            </Stack>
+          </Stack>
+        </Box>
       </Box>
     </Box>
   )
