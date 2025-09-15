@@ -1,4 +1,5 @@
 import { Stack, Typography } from '@mui/material'
+import { siteConfig } from '../config'
 import Grid from '@mui/material/GridLegacy'
 
 export default function About() {
@@ -19,6 +20,13 @@ export default function About() {
         <Stack>
           <Typography variant="h6">Education</Typography>
           <Typography color="text.secondary">MIAGE - Methods of Applied Computer Science to Business Management</Typography>
+          <Typography variant="h6" sx={{ mt: 3 }}>Recent Experience</Typography>
+          {siteConfig.experiences?.slice(0, 2).map((e) => (
+            <Stack key={`${e.company}-${e.role}`} sx={{ mt: 1 }}>
+              <Typography variant="subtitle2">{e.role} — {e.company}</Typography>
+              <Typography variant="caption" color="text.secondary">{e.startDate} — {e.endDate}</Typography>
+            </Stack>
+          ))}
         </Stack>
       </Grid>
     </Grid>

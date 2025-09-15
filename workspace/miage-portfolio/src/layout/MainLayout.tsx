@@ -25,6 +25,7 @@ const navItems = [
   { label: 'About', to: '/about', icon: <PersonIcon /> },
   { label: 'Skills', to: '/skills', icon: <BarChartIcon /> },
   { label: 'Projects', to: '/projects', icon: <WorkIcon /> },
+  { label: 'Experience', to: '/experience', icon: <WorkIcon /> },
   { label: 'Resume', to: '/resume', icon: <DescriptionIcon /> },
   { label: 'Contact', to: '/contact', icon: <EmailIcon /> },
 ]
